@@ -2,22 +2,22 @@
     --cherry-blossom: #edafb8ff;
     --powder-petal: #f7e1d7ff;
     --dust-grey: #dedbd2ff;
-    --ash-grey: #b0c4b1ff;
-    --iron-grey: #4a5759ff;
+    --ash-grey: #6b7f7c;
+    --iron-grey: #2d3a3c;
     
     --color-bg: #f7e1d7ff;
     --color-surface: #dedbd2ff;
-    --color-surface-elevated: #f7e1d7ff;
-    --color-text-primary: #4a5759ff;
-    --color-text-secondary: #b0c4b1ff;
-    --color-accent: #edafb8ff;
-    --color-accent-dark: #d497a0ff;
-    --color-border: #dedbd2ff;
+    --color-surface-elevated: #f0e8e2ff;
+    --color-text-primary: #2d3a3c;
+    --color-text-secondary: #5a6d6a;
+    --color-accent: #c4748a;
+    --color-accent-dark: #a8616f;
+    --color-border: #e5dcd3ff;
     --font-display: 'Roboto', sans-serif;
     --font-body: 'Google Sans', sans-serif;
-    --shadow-sm: 0 2px 8px rgba(237, 175, 184, 0.08);
-    --shadow-md: 0 4px 16px rgba(237, 175, 184, 0.12);
-    --shadow-lg: 0 8px 32px rgba(237, 175, 184, 0.16);
+    --shadow-sm: 0 2px 8px rgba(196, 116, 138, 0.08);
+    --shadow-md: 0 4px 16px rgba(196, 116, 138, 0.12);
+    --shadow-lg: 0 8px 32px rgba(196, 116, 138, 0.16);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -624,9 +624,10 @@ body {
 .metric-row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 0.75rem;
+    align-items: flex-start;
+    padding: 1rem 0;
     border-bottom: 1px solid var(--color-border);
+    gap: 1.5rem;
 }
 
 .metric-row:last-child {
@@ -636,13 +637,18 @@ body {
 .metric-label {
     color: var(--color-text-secondary);
     font-size: 0.875rem;
+    flex: 1;
+    min-width: 150px;
 }
 
 .metric-value {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: var(--color-text-primary);
+    text-align: right;
+    flex: 1;
+    min-width: 150px;
 }
 
 .metric-value.highlight {
