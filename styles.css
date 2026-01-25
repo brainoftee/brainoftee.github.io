@@ -1,17 +1,17 @@
 :root {
-    --color-bg: #faf8fb;
-    --color-surface: #f5f2f8;
-    --color-surface-elevated: #f0edf6;
-    --color-text-primary: #2d1b4e;
-    --color-text-secondary: #6b5b7d;
-    --color-accent: #d4518d;
-    --color-accent-dark: #e8a6c9;
-    --color-border: #e8dff5;
+    --color-bg: #fafaf9;
+    --color-surface: #f5f0f8;
+    --color-surface-elevated: #ede5f5;
+    --color-text-primary: #1a1a2e;
+    --color-text-secondary: #5a5a7a;
+    --color-accent: #7d4fa8;
+    --color-accent-dark: #a78db8;
+    --color-border: #ddd0e8;
     --font-display: 'Roboto', sans-serif;
     --font-body: 'Google Sans', sans-serif;
-    --shadow-sm: 0 2px 8px rgba(212, 81, 141, 0.1);
-    --shadow-md: 0 4px 16px rgba(212, 81, 141, 0.15);
-    --shadow-lg: 0 8px 32px rgba(212, 81, 141, 0.2);
+    --shadow-sm: 0 2px 8px rgba(125, 79, 168, 0.08);
+    --shadow-md: 0 4px 16px rgba(125, 79, 168, 0.12);
+    --shadow-lg: 0 8px 32px rgba(125, 79, 168, 0.16);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
