@@ -23,16 +23,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Intersection Observer for scroll animations
+// Enhanced Intersection Observer for scroll animations with stagger
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('aos-animate');
+            // Add stagger delay for grouped elements
+            setTimeout(() => {
+                entry.target.classList.add('aos-animate');
+            }, index * 100);
         }
     });
 }, observerOptions);
@@ -176,15 +179,140 @@ function toggleWriting(sampleId) {
     }
 }
 
-// Add hover effect to personal project cards
+// Enhanced card interactions
 document.addEventListener('DOMContentLoaded', () => {
+    // Add hover effect to personal project cards
     document.querySelectorAll('.personal-project-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
+            this.style.transform = 'translateY(-12px)';
         });
-        
+
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
         });
     });
+
+    // Animate stat counters on scroll
+    const statValues = document.querySelectorAll('.stat-value');
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+
+                // Store original value as data attribute if not already stored
+                if (!target.dataset.originalValue) {
+                    target.dataset.originalValue = target.textContent.trim();
+                }
+
+                const text = target.dataset.originalValue;
+
+                // Extract the number (including decimals)
+                const numberMatch = text.match(/[\d,.]+/);
+
+                if (numberMatch) {
+                    const numStr = numberMatch[0].replace(/,/g, '');
+                    const endValue = parseFloat(numStr);
+
+                    if (!isNaN(endValue) && endValue > 0) {
+                        try {
+                            animateNumber(target, 0, endValue, 2000);
+                        } catch (error) {
+                            // If animation fails, restore original value
+                            target.textContent = target.dataset.originalValue;
+                        }
+                        statObserver.unobserve(target);
+                    }
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statValues.forEach(stat => statObserver.observe(stat));
+
+    // Add ripple effect to buttons
+    document.querySelectorAll('.read-more-btn, .nav-arrow').forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
 });
+
+// Number animation function for stat counters
+function animateNumber(element, start, end, duration) {
+    // Get the original value from data attribute or current text
+    const originalText = element.dataset.originalValue || element.textContent.trim();
+    const range = end - start;
+    const increment = range / (duration / 16);
+    let current = start;
+
+    // Extract prefix, number, and suffix more carefully
+    const match = originalText.match(/^([^\d]*)([\d,.]+)(.*)$/);
+    if (!match) return; // Exit if no number found
+
+    const prefix = match[1];
+    const numberPart = match[2];
+    const suffix = match[3];
+
+    // Check if it's a decimal number
+    const hasDecimal = numberPart.includes('.');
+    const decimalPlaces = hasDecimal ? numberPart.split('.')[1].length : 0;
+
+    const timer = setInterval(() => {
+        current += increment;
+
+        if (current >= end) {
+            // On completion, restore the exact original format
+            current = end;
+            clearInterval(timer);
+            element.textContent = originalText;
+            return;
+        }
+
+        let displayValue;
+        if (hasDecimal) {
+            displayValue = current.toFixed(decimalPlaces);
+        } else {
+            displayValue = Math.floor(current).toString();
+        }
+
+        element.textContent = prefix + displayValue + suffix;
+    }, 16);
+}
+
+// Add ripple animation keyframes dynamically
+if (!document.querySelector('#ripple-style')) {
+    const style = document.createElement('style');
+    style.id = 'ripple-style';
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
