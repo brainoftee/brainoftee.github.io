@@ -160,12 +160,21 @@ if (scrollIndicator) {
 // Image Carousel Functions
 function initCarousel() {
     const carousel = document.querySelector('.carousel-container');
-    if (!carousel) return;
+    if (!carousel) {
+        console.log('Carousel container not found');
+        return;
+    }
 
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.querySelector('.carousel-prev');
     const nextBtn = document.querySelector('.carousel-next');
     const dots = document.querySelectorAll('.carousel-dot');
+
+    if (!slides.length || !prevBtn || !nextBtn) {
+        console.log('Carousel elements missing:', { slides: slides.length, prevBtn: !!prevBtn, nextBtn: !!nextBtn });
+        return;
+    }
+
     let currentSlide = 0;
 
     function showSlide(index) {
@@ -176,7 +185,7 @@ function initCarousel() {
         if (index < 0) currentSlide = slides.length - 1;
 
         slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
+        if (dots[currentSlide]) dots[currentSlide].classList.add('active');
     }
 
     function nextSlide() {
@@ -191,8 +200,8 @@ function initCarousel() {
         showSlide(currentSlide);
     }
 
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
 
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
@@ -220,10 +229,12 @@ function initCarousel() {
             if (e.key === 'ArrowRight') nextSlide();
         }
     });
+
+    console.log('Carousel initialized successfully');
 }
 
-// Modal Functions
-function openModal(modalId) {
+// Modal Functions - Exposed to window for onclick handlers
+window.openModal = function(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.add('active');
@@ -234,12 +245,12 @@ function openModal(modalId) {
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
 
-        firstElement?.focus();
+        if (firstElement) firstElement.focus();
 
         // Close on escape key
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
-                closeModal(modalId);
+                window.closeModal(modalId);
                 document.removeEventListener('keydown', handleEscape);
             }
         };
@@ -248,19 +259,19 @@ function openModal(modalId) {
         // Close on background click
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                closeModal(modalId);
+                window.closeModal(modalId);
             }
         });
     }
-}
+};
 
-function closeModal(modalId) {
+window.closeModal = function(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
-}
+};
 
 // Enhanced card interactions
 document.addEventListener('DOMContentLoaded', () => {
