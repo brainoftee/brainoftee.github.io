@@ -141,3 +141,50 @@ const optimizedScroll = debounce(() => {
 window.addEventListener('scroll', optimizedScroll);
 
 console.log('Portfolio loaded successfully! ✨');
+
+// Handle scroll indicator visibility
+const scrollIndicator = document.querySelector('.scroll-indicator-container');
+if (scrollIndicator) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+            scrollIndicator.classList.add('hidden');
+        } else {
+            scrollIndicator.classList.remove('hidden');
+        }
+    });
+}
+
+// Toggle writing sample expansion
+function toggleWriting(sampleId) {
+    const fullText = document.getElementById(sampleId);
+    const button = event.target;
+    const originalText = button.getAttribute('data-original') || 'Read More';
+
+    if (fullText.style.display === 'none' || fullText.style.display === '') {
+        fullText.style.display = 'block';
+        button.textContent = 'Show Less';
+        button.classList.add('expanded');
+
+        // Smooth scroll to show full content
+        setTimeout(() => {
+            fullText.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    } else {
+        fullText.style.display = 'none';
+        button.textContent = originalText;
+        button.classList.remove('expanded');
+    }
+}
+
+// Add hover effect to personal project cards
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.personal-project-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
