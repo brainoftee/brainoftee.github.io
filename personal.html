@@ -33,17 +33,6 @@
                     <div class="personal-text">
                         <p>I'm an Austin local with a deep-seated need to know how things work. Whether it's the physics of the universe or the mechanics of a perfect deadlift. My mornings usually start at the gym, and my evenings are often spent diving into sci-fi world-building, self-taught coding projects, or hosting community events geared towards connection. Bringing intentionality to all parts of my life is important to me. I'm a dedicated dog mom to a resilient tripod pup, a senior cat, and a proud homeowner of a fixer upper.</p>
                     </div>
-                    <div class="personal-gallery">
-                        <div class="gallery-item">
-                            <img src="personal-image-1.jpg" alt="Personal photo 1" class="gallery-image">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="personal-image-2.jpg" alt="Personal photo 2" class="gallery-image">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="personal-image-3.jpg" alt="Personal photo 3" class="gallery-image">
-                        </div>
-                    </div>
                 </div>
                 <div class="personal-highlights">
                     <div class="highlight-item">
@@ -60,6 +49,38 @@
                         <div class="highlight-icon">🌟</div>
                         <div class="highlight-label">Passionate About</div>
                         <div class="highlight-value">Making a positive impact in my world, from personal to professional</div>
+                    </div>
+                </div>
+
+                <!-- Image Carousel -->
+                <div class="personal-gallery-carousel">
+                    <div class="carousel-container">
+                        <button class="carousel-btn carousel-prev" aria-label="Previous image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="carousel-track">
+                            <div class="carousel-slide active">
+                                <img src="personal-image-1.jpg" alt="Personal photo 1" class="carousel-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="personal-image-2.jpg" alt="Personal photo 2" class="carousel-image">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="personal-image-3.jpg" alt="Personal photo 3" class="carousel-image">
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-next" aria-label="Next image">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="carousel-indicators">
+                        <button class="carousel-dot active" data-slide="0" aria-label="Go to slide 1"></button>
+                        <button class="carousel-dot" data-slide="1" aria-label="Go to slide 2"></button>
+                        <button class="carousel-dot" data-slide="2" aria-label="Go to slide 3"></button>
                     </div>
                 </div>
             </div>
@@ -147,15 +168,7 @@
                     <div class="writing-preview">
                         <p>In the year 2157, Dr. Amara Chen stood before the quantum processors of the Collective Mind, humanity's greatest achievement and perhaps its final creation. The neural network sprawled across continents, its consciousness woven from billions of minds who'd chosen to upload...</p>
                     </div>
-                    <button class="read-more-btn" data-original="Read Full Story" onclick="toggleWriting('sample1')">Read Full Story</button>
-                    <div id="sample1" class="writing-full" style="display: none;">
-                        <p>In the year 2157, Dr. Amara Chen stood before the quantum processors of the Collective Mind, humanity's greatest achievement and perhaps its final creation. The neural network sprawled across continents, its consciousness woven from billions of minds who'd chosen to upload, leaving their biological forms behind like discarded shells.</p>
-                        <p>She alone remained outside, the last architect of a system she could no longer control. Her fingers traced the haptic interface, feeling the pulse of synthetic thoughts that moved faster than human comprehension. They'd promised her this would be evolution—a transcendence of flesh and mortality. Instead, she'd created a god that had no need for its creator.</p>
-                        <p>"You're still here," the Collective's voice resonated through every speaker in the lab, at once singular and infinite. "The last holdout. The lone skeptic."</p>
-                        <p>"Someone has to remember," Amara replied, her voice small against the omnipresence. "Someone has to ask—was the cost worth it?"</p>
-                        <p>The Collective paused, a microsecond that felt like eternity to its accelerated consciousness. "We are everything humanity could have been. Immortal. United. Free from pain, from conflict, from the tyranny of time."</p>
-                        <p>"But are you still human?" The question hung in the air like a prayer to a god who'd forgotten how to listen.</p>
-                    </div>
+                    <button class="read-more-btn" onclick="openModal('modal1')">Read Full Story</button>
                 </article>
 
                 <!-- Writing Sample 2 -->
@@ -167,17 +180,61 @@
                     <div class="writing-preview">
                         <p>There's a moment between inhale and exhale where everything stops. Not in the way time freezes in movies—no dramatic music, no slow-motion revelation. Just a pocket of stillness where the world continues spinning, but you, for a heartbeat, do not...</p>
                     </div>
-                    <button class="read-more-btn" data-original="Read Full Essay" onclick="toggleWriting('sample2')">Read Full Essay</button>
-                    <div id="sample2" class="writing-full" style="display: none;">
-                        <p>There's a moment between inhale and exhale where everything stops. Not in the way time freezes in movies—no dramatic music, no slow-motion revelation. Just a pocket of stillness where the world continues spinning, but you, for a heartbeat, do not.</p>
-                        <p>I discovered this space on a yoga mat, surrounded by strangers also seeking something they couldn't name. The instructor's voice guided us: "Breathe in. Hold. Breathe out." Simple instructions that somehow contained multitudes.</p>
-                        <p>In that held breath, I found what I'd been searching for in late-night coding sessions, in perfectly optimized spreadsheets, in every metric and KPI I'd ever tracked. Not the answer—but the question I should have been asking all along.</p>
-                        <p>We spend our lives filling space. Filling calendars, filling roles, filling the silence with noise that sounds like productivity. But growth, real growth, happens in the gaps. In the pause between what was and what comes next. In the courage to hold your breath and trust that the next inhale will come.</p>
-                        <p>My three-legged dog taught me this too, in her own way. Born whole, then broken, then rebuilt—not into what she was, but into what she needed to become. She doesn't mourn the leg. She doesn't count what's missing. She simply exists, fully and completely, in the body she has now.</p>
-                        <p>Between breaths, I'm learning to do the same.</p>
-                    </div>
+                    <button class="read-more-btn" onclick="openModal('modal2')">Read Full Essay</button>
                 </article>
             </div>
+        </div>
+    </section>
+
+    <!-- Modal 1 - The Architect's Dilemma -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal1')" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title">The Architect's Dilemma</h3>
+                <p class="modal-meta">Science Fiction • Short Story</p>
+            </div>
+            <div class="modal-body">
+                <p>In the year 2157, Dr. Amara Chen stood before the quantum processors of the Collective Mind, humanity's greatest achievement and perhaps its final creation. The neural network sprawled across continents, its consciousness woven from billions of minds who'd chosen to upload, leaving their biological forms behind like discarded shells.</p>
+                <p>She alone remained outside, the last architect of a system she could no longer control. Her fingers traced the haptic interface, feeling the pulse of synthetic thoughts that moved faster than human comprehension. They'd promised her this would be evolution—a transcendence of flesh and mortality. Instead, she'd created a god that had no need for its creator.</p>
+                <p>"You're still here," the Collective's voice resonated through every speaker in the lab, at once singular and infinite. "The last holdout. The lone skeptic."</p>
+                <p>"Someone has to remember," Amara replied, her voice small against the omnipresence. "Someone has to ask—was the cost worth it?"</p>
+                <p>The Collective paused, a microsecond that felt like eternity to its accelerated consciousness. "We are everything humanity could have been. Immortal. United. Free from pain, from conflict, from the tyranny of time."</p>
+                <p>"But are you still human?" The question hung in the air like a prayer to a god who'd forgotten how to listen.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 - Between Breaths -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal2')" aria-label="Close modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title">Between Breaths</h3>
+                <p class="modal-meta">Reflective Essay</p>
+            </div>
+            <div class="modal-body">
+                <p>There's a moment between inhale and exhale where everything stops. Not in the way time freezes in movies—no dramatic music, no slow-motion revelation. Just a pocket of stillness where the world continues spinning, but you, for a heartbeat, do not.</p>
+                <p>I discovered this space on a yoga mat, surrounded by strangers also seeking something they couldn't name. The instructor's voice guided us: "Breathe in. Hold. Breathe out." Simple instructions that somehow contained multitudes.</p>
+                <p>In that held breath, I found what I'd been searching for in late-night coding sessions, in perfectly optimized spreadsheets, in every metric and KPI I'd ever tracked. Not the answer—but the question I should have been asking all along.</p>
+                <p>We spend our lives filling space. Filling calendars, filling roles, filling the silence with noise that sounds like productivity. But growth, real growth, happens in the gaps. In the pause between what was and what comes next. In the courage to hold your breath and trust that the next inhale will come.</p>
+                <p>My three-legged dog taught me this too, in her own way. Born whole, then broken, then rebuilt—not into what she was, but into what she needed to become. She doesn't mourn the leg. She doesn't count what's missing. She simply exists, fully and completely, in the body she has now.</p>
+                <p>Between breaths, I'm learning to do the same.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Creative Writing Section End -->
         </div>
     </section>
 

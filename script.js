@@ -157,30 +157,116 @@ if (scrollIndicator) {
     });
 }
 
-// Toggle writing sample expansion
-function toggleWriting(sampleId) {
-    const fullText = document.getElementById(sampleId);
-    const button = event.target;
-    const originalText = button.getAttribute('data-original') || 'Read More';
+// Image Carousel Functions
+function initCarousel() {
+    const carousel = document.querySelector('.carousel-container');
+    if (!carousel) return;
 
-    if (fullText.style.display === 'none' || fullText.style.display === '') {
-        fullText.style.display = 'block';
-        button.textContent = 'Show Less';
-        button.classList.add('expanded');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    const dots = document.querySelectorAll('.carousel-dot');
+    let currentSlide = 0;
 
-        // Smooth scroll to show full content
-        setTimeout(() => {
-            fullText.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-    } else {
-        fullText.style.display = 'none';
-        button.textContent = originalText;
-        button.classList.remove('expanded');
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        if (index >= slides.length) currentSlide = 0;
+        if (index < 0) currentSlide = slides.length - 1;
+
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        if (currentSlide >= slides.length) currentSlide = 0;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide--;
+        if (currentSlide < 0) currentSlide = slides.length - 1;
+        showSlide(currentSlide);
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+        });
+    });
+
+    // Auto-advance carousel every 5 seconds
+    let autoplayInterval = setInterval(nextSlide, 5000);
+
+    // Pause autoplay on hover
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoplayInterval);
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        autoplayInterval = setInterval(nextSlide, 5000);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!document.querySelector('.modal.active')) {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        }
+    });
+}
+
+// Modal Functions
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Focus trap
+        const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        firstElement?.focus();
+
+        // Close on escape key
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                closeModal(modalId);
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+
+        // Close on background click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal(modalId);
+            }
+        });
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
     }
 }
 
 // Enhanced card interactions
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize carousel
+    initCarousel();
+
     // Add hover effect to personal project cards
     document.querySelectorAll('.personal-project-card').forEach(card => {
         card.addEventListener('mouseenter', function() {

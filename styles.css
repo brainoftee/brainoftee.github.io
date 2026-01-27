@@ -522,9 +522,12 @@ body {
 
 .overview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
     margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .overview-card {
@@ -582,6 +585,19 @@ body {
     opacity: 0.4;
 }
 
+.overview-icon {
+    font-size: 3.5rem;
+    margin-bottom: var(--space-3);
+    filter: grayscale(10%);
+    transition: transform 0.3s var(--ease-spring);
+    position: relative;
+    z-index: 1;
+}
+
+.overview-card:hover .overview-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
 .overview-title {
     font-family: var(--font-display);
     font-size: 1.5rem;
@@ -610,16 +626,15 @@ body {
 }
 
 .personal-intro {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    display: block;
+    margin-bottom: var(--space-4);
 }
 
 .personal-text {
-    font-size: 1.125rem;
-    line-height: 1.8;
+    font-size: 1.25rem;
+    line-height: 1.9;
     color: var(--color-text-secondary);
+    max-width: 100%;
 }
 
 .personal-text p {
@@ -727,6 +742,255 @@ body {
     font-weight: 600;
     color: var(--color-text-primary);
     line-height: 1.6;
+}
+
+/* Image Carousel */
+.personal-gallery-carousel {
+    margin-top: var(--space-5);
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-elevated);
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-smooth);
+    pointer-events: none;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(247, 225, 215, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(237, 175, 184, 0.3);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s var(--ease-spring);
+    color: var(--color-accent);
+}
+
+.carousel-btn:hover {
+    background: rgba(247, 225, 215, 1);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.carousel-btn:focus-visible {
+    outline: 3px solid var(--color-accent-bright);
+    outline-offset: 3px;
+}
+
+.carousel-prev {
+    left: 1rem;
+}
+
+.carousel-next {
+    right: 1rem;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-border);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-smooth);
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background: var(--color-accent-muted);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: var(--color-accent);
+    width: 32px;
+    border-radius: var(--radius-full);
+}
+
+.carousel-dot:focus-visible {
+    outline: 2px solid var(--color-accent-bright);
+    outline-offset: 2px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(45, 58, 60, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: var(--space-4);
+    animation: fadeIn 0.3s var(--ease-smooth);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(237, 175, 184, 0.3);
+    animation: slideUp 0.4s var(--ease-spring);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-spring);
+    z-index: 1;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.modal-close:focus-visible {
+    outline: 3px solid var(--color-accent-light);
+    outline-offset: 3px;
+}
+
+.modal-header {
+    padding: var(--space-6) var(--space-5) var(--space-3);
+    border-bottom: 2px solid var(--color-border);
+    position: relative;
+}
+
+.modal-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: var(--space-5);
+    width: 60px;
+    height: 2px;
+    background: var(--gradient-accent);
+}
+
+.modal-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+    padding-right: 3rem;
+}
+
+.modal-meta {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.modal-body {
+    padding: var(--space-5);
+    color: var(--color-text-secondary);
+    line-height: 1.9;
+    font-size: 1.0625rem;
+}
+
+.modal-body p {
+    margin-bottom: 1.5rem;
+}
+
+.modal-body p:last-child {
+    margin-bottom: 0;
+}
+
+.modal-body p:first-of-type::first-letter {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: var(--weight-bold);
+    color: var(--color-accent);
+    float: left;
+    line-height: 1;
+    margin: 0.1rem 0.2rem 0 0;
 }
 
 /* Professional Section */
@@ -1750,11 +2014,11 @@ body:has(#overview) .footer-text p {
 }
 
 .writing-samples {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
     margin-top: 3rem;
-    max-width: 900px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1974,6 +2238,11 @@ body:has(#overview) .footer-text p {
 
 /* Responsive Design for Personal Sections */
 @media (max-width: 768px) {
+    .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
     .personal-intro {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -1993,6 +2262,24 @@ body:has(#overview) .footer-text p {
         padding: 1.5rem;
     }
 
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-prev {
+        left: 0.5rem;
+    }
+
+    .carousel-next {
+        right: 0.5rem;
+    }
+
+    .writing-samples {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
     .writing-sample {
         padding: 1.5rem;
     }
@@ -2001,8 +2288,21 @@ body:has(#overview) .footer-text p {
         font-size: 1.5rem;
     }
 
-    .writing-preview,
-    .writing-full {
+    .writing-preview {
+        font-size: 1rem;
+    }
+
+    .modal-content {
+        margin: var(--space-2);
+        max-height: 95vh;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .modal-body {
+        padding: var(--space-4);
         font-size: 1rem;
     }
 
@@ -2026,12 +2326,30 @@ body:has(#overview) .footer-text p {
 }
 
 @media (max-width: 480px) {
+    .overview-icon {
+        font-size: 2.5rem;
+    }
+
     .personal-project-image {
         height: 180px;
     }
 
     .personal-project-title {
         font-size: 1.25rem;
+    }
+
+    .carousel-track {
+        aspect-ratio: 4 / 3;
+    }
+
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .carousel-btn svg {
+        width: 18px;
+        height: 18px;
     }
 
     .writing-sample {
@@ -2041,5 +2359,20 @@ body:has(#overview) .footer-text p {
     .read-more-btn {
         width: 100%;
         padding: 0.875rem;
+    }
+
+    .modal-close {
+        width: 36px;
+        height: 36px;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .modal-header {
+        padding: var(--space-4) var(--space-3) var(--space-2);
+    }
+
+    .modal-body {
+        padding: var(--space-3);
     }
 }
