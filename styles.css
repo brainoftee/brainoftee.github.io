@@ -483,7 +483,7 @@ body {
 
 /* Section Styles */
 .section {
-    padding: 8rem 2rem;
+    padding: 3rem 2rem;
     position: relative;
 }
 
@@ -494,7 +494,7 @@ body {
 
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .section-label {
@@ -523,8 +523,8 @@ body {
 .overview-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    margin-top: 3rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
@@ -620,14 +620,14 @@ body {
 .personal-content {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .personal-intro {
     display: block;
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
 }
 
 .personal-text {
@@ -746,7 +746,7 @@ body {
 
 /* Image Carousel */
 .personal-gallery-carousel {
-    margin-top: var(--space-5);
+    margin-top: var(--space-2);
 }
 
 .carousel-container {
@@ -1007,11 +1007,9 @@ body {
     font-size: 1.125rem;
     line-height: 1.8;
     color: var(--color-text-secondary);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     text-align: center;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 100%;
 }
 
 .expertise-grid {
@@ -1225,19 +1223,24 @@ body {
 
 .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .metric-card {
     background: var(--color-surface-elevated);
     border: 1px solid rgba(237, 175, 184, 0.3);
     border-radius: var(--radius-md);
-    padding: var(--space-5);
+    padding: var(--space-4);
     transition: all 0.4s var(--ease-spring);
     position: relative;
     box-shadow: var(--shadow-sm);
+    overflow: hidden;
 }
 
 .metric-card::before {
@@ -1289,11 +1292,12 @@ body {
 
 .metric-row {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 1rem 0;
+    padding: 0.75rem 0;
     border-bottom: 1px solid var(--color-border);
-    gap: 1.5rem;
+    gap: 0.5rem 1rem;
 }
 
 .metric-row:last-child {
@@ -1303,18 +1307,19 @@ body {
 .metric-label {
     color: var(--color-text-secondary);
     font-size: 0.875rem;
-    flex: 1;
-    min-width: 150px;
+    flex: 1 1 auto;
+    min-width: 120px;
 }
 
 .metric-value {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--color-text-primary);
     text-align: right;
-    flex: 1;
-    min-width: 150px;
+    flex: 1 1 auto;
+    min-width: 100px;
+    word-break: break-word;
 }
 
 .metric-value.highlight {
@@ -1325,8 +1330,8 @@ body {
     background: var(--color-surface-elevated);
     border: 2px solid var(--color-accent);
     border-radius: 12px;
-    padding: 2.5rem;
-    margin-top: 3rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .summary-title {
@@ -1349,7 +1354,7 @@ body {
 
 /* Footer - Enhanced */
 .footer {
-    padding: var(--space-6) var(--space-4);
+    padding: var(--space-3) var(--space-4);
     background: var(--color-bg);
     border-top: 1px solid var(--color-border);
     position: relative;
@@ -1490,10 +1495,10 @@ body {
 
 @media (max-width: 768px) {
     :root {
-        --space-6: 3rem;
-        --space-7: 4rem;
-        --space-8: 4rem;
-        --space-9: 6rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+        --space-8: 3rem;
+        --space-9: 4rem;
     }
 
     .hero-container {
@@ -1547,7 +1552,7 @@ body {
     }
 
     .section {
-        padding: var(--space-6) var(--space-2);
+        padding: var(--space-4) var(--space-2);
     }
 
     .project-grid {
@@ -1903,11 +1908,20 @@ body:has(#overview) .footer-text p {
     background: var(--color-surface);
 }
 
+/* Inline Personal Projects within Personal Section */
+.personal-projects-inline {
+    margin-top: var(--space-2);
+}
+
+.personal-projects-inline .section-header {
+    margin-bottom: 1.5rem;
+}
+
 .personal-project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .personal-project-card {
@@ -2038,8 +2052,8 @@ body:has(#overview) .footer-text p {
 .writing-samples {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    margin-top: 3rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
