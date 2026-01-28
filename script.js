@@ -413,3 +413,35 @@ if (!document.querySelector('#ripple-style')) {
     `;
     document.head.appendChild(style);
 }
+
+// Project card popout functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card');
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't toggle if clicking on a link or button
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+                return;
+            }
+
+            this.classList.toggle('expanded');
+
+            // Optional: Close other expanded cards
+            // projectCards.forEach(otherCard => {
+            //     if (otherCard !== this) {
+            //         otherCard.classList.remove('expanded');
+            //     }
+            // });
+        });
+
+        // Add keyboard support
+        card.setAttribute('tabindex', '0');
+        card.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+});

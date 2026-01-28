@@ -446,7 +446,7 @@ body {
 
 .stat-value {
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 4.5rem;
     font-weight: 700;
     color: var(--color-accent);
     line-height: 1;
@@ -1079,6 +1079,7 @@ body {
     overflow: hidden;
     box-shadow: var(--shadow-sm),
                 var(--shadow-sm);
+    cursor: pointer;
 }
 
 .project-card::before {
@@ -1140,17 +1141,39 @@ body {
     color: var(--color-text-primary);
 }
 
+.project-title::after {
+    content: ' ▼';
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    opacity: 0.6;
+    transition: transform 0.3s var(--ease-smooth);
+    display: inline-block;
+}
+
+.project-card.expanded .project-title::after {
+    transform: rotate(180deg);
+}
+
 .project-challenge,
 .project-solution {
-    margin-bottom: 1.5rem;
     line-height: 1.8;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-bottom: 0;
+    transition: max-height 0.5s var(--ease-smooth), opacity 0.3s var(--ease-smooth), margin-bottom 0.3s var(--ease-smooth);
+}
+
+.project-card.expanded .project-challenge,
+.project-card.expanded .project-solution {
+    max-height: 1000px;
+    opacity: 1;
+    margin-bottom: 1.5rem;
 }
 
 .project-challenge strong,
 .project-solution strong {
     color: var(--color-accent);
-    display: block;
-    margin-bottom: 0.5rem;
 }
 
 .project-solution ul {
@@ -1178,13 +1201,12 @@ body {
     border-left: 3px solid var(--color-accent);
     color: var(--color-text-secondary);
     line-height: 1.6;
-    display: flex;
-    flex-direction: column;
     min-height: 100px;
 }
 
 .impact-badge {
-    display: inline-block;
+    display: block;
+    width: fit-content;
     padding: 0.25rem 0.75rem;
     background: var(--color-accent);
     color: var(--color-bg);
