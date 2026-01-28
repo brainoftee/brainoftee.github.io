@@ -420,8 +420,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     projectCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Don't toggle if clicking on a link or button
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            // Don't toggle if clicking on a link, button, or image preview
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' ||
+                e.target.closest('.project-image-preview')) {
                 return;
             }
 
@@ -444,4 +445,46 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+});
+
+// ===== IMAGE LIGHTBOX FUNCTIONALITY =====
+window.openImageLightbox = function(imageSrc) {
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+
+    if (lightbox && lightboxImage) {
+        lightboxImage.src = imageSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Focus trap for accessibility
+        lightbox.focus();
+    }
+};
+
+window.closeImageLightbox = function() {
+    const lightbox = document.getElementById('image-lightbox');
+
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+};
+
+// Close lightbox on background click
+document.addEventListener('click', function(e) {
+    const lightbox = document.getElementById('image-lightbox');
+    if (lightbox && e.target === lightbox) {
+        closeImageLightbox();
+    }
+});
+
+// Close lightbox on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const lightbox = document.getElementById('image-lightbox');
+        if (lightbox && lightbox.classList.contains('active')) {
+            closeImageLightbox();
+        }
+    }
 });
